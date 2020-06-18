@@ -1,16 +1,35 @@
 const usersCtrl = {};
 
-usersCtrl.getUsers = (req, res) => res.json({ message: 'GET- Users' });
+const User = require('../models/Users');
 
-usersCtrl.createUser = (req, res) => res.json({ message: 'POST- New User' });
+usersCtrl.getUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    res.json({ users });
+  }
+  catch (err) {
+    res.status(400).json({
+      error: err
+    });
+  }
+};
 
-//usersCtrl.getUser = (req, res) => res.json({ message: 'GET- Notes unique' });
+usersCtrl.createUser = async (req, res) => {
+  const { username } = req.body;
+  const newUser = new User({ username });
+  await newUser.save();
+  res.json('User created');
+};
 
-//usersCtrl.updateUser = (req, res) => res.json({ message: 'PUT- Notes update' });
+//usersCtrl.getUser = (req, res) => res.json({ message: 'GET- User unique' });
 
-usersCtrl.deleteUser = (req, res) => res.json({ message: 'DELETE- User REMOVED' });
+//usersCtrl.updateUser = (req, res) => res.json({ message: 'PUT- User update' });
 
-
+usersCtrl.deleteUser = async (req, res) => {
+  const { id } = req.params;
+  await User.findByIdAndDelete(id);
+  res.json('User deleted');
+};
 
 
 
