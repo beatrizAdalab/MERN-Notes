@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { Inbox } from '@material-ui/icons';
 
 
 export default class Navigation extends Component {
@@ -8,6 +9,7 @@ export default class Navigation extends Component {
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark p-3">
         <div className="container">
           <Link className="navbar-brand" to="/">
+            <Inbox className="mr-2 text-warning" />
             NotesApp
           </Link>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
