@@ -22,33 +22,31 @@ function CreateNote({ match }) {
   }
 
   return (
-    <div className="row">
+    <div className="card-columns">
       {
         notes.map(note => (
-          <div className="col-md-4 p-2" key={note._id}>
-            <div className="card">
-              <div className="card-header bg-warning d-flex justify-content-between">
-                <h5 className="my-auto">{note.title}</h5>
-                <Link to={"/edit/" + note._id} className="btn">
-                  <EditOutlined />
-                </Link>
-              </div>
-              <div className="card-body">
-                <p>
-                  {note.content}
-                </p>
-                <p>
-                  Author: {note.author}
-                </p>
-                <p className="text-secondary">
-                  {format(note.createdAt)}
-                </p>
-              </div>
-              <div className="card-footer">
-                <button className="btn btn-outline-danger" onClick={() => deleteNote(note._id)}>
-                  Delete
+          <div className="card" key={note._id}>
+            <div className="card-header bg-white d-flex justify-content-between">
+              <h5 className="my-auto">{note.title}</h5>
+              <Link to={"/edit/" + note._id} className="btn">
+                <EditOutlined className="text-secondary" />
+              </Link>
+            </div>
+            <div className="card-body">
+              <p>
+                {note.content}
+              </p>
+              <p>
+                Author: {note.author}
+              </p>
+              <p className="text-secondary">
+                {format(note.createdAt)}
+              </p>
+            </div>
+            <div className="card-footer bg-white">
+              <button className="btn btn-outline-danger" onClick={() => deleteNote(note._id)}>
+                Delete
                 </button>
-              </div>
             </div>
           </div>
         ))

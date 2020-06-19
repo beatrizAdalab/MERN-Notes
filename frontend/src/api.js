@@ -50,6 +50,13 @@ export const api = {
     } catch (err) { console.log(err) }
   },
 
+  editNote: async (id, note) => {
+    try {
+      const res = await axios.put(`${URL}/notes/${id}`, note)
+      return res.data
+    } catch (err) { console.log(err) }
+  },
+
   deleteNote: async (id) => {
     try {
       const res = await axios.delete(`${URL}/notes/${id}`)

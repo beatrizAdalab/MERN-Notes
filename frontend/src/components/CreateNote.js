@@ -14,15 +14,19 @@ function CreateNote({ match }) {
 
   useEffect(() => {
     updateUsers();
-    //console.log(match.params.id)
+    if (match.params.id) {
+      getNote(match.params.id);
+      setEditing(true);
+    }
   }, []);
 
   const getNote = async (id) => {
     const note = await api.getNote(id)
     console.log(note)
-    //setTitle(note.title)
-    //setContent(note.content)
-    //setUserselected(note.author)
+    setTitle(note.title)
+    setContent(note.content)
+    setUserselected(note.author)
+    //setDate(note.date)
   }
 
   const updateUsers = async () => {
@@ -39,11 +43,13 @@ function CreateNote({ match }) {
       date,
       author: userselected,
     };
-    await api.createNote(newNote)
-    // if (editing) {
-    //   console.log('estoy editando')
-    // }
-    // console.log('estoy creando')
+
+    if (editing) {
+      await api.editNote(match.params.id, newNote)
+    } else {
+      console.log(newNote, 'nsnsnsn')
+      await api.createNote(newNote)
+    }
     window.location.href = '/';
   }
 
