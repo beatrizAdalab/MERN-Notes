@@ -22,11 +22,11 @@ function CreateNote({ match }) {
 
   const getNote = async (id) => {
     const note = await api.getNote(id)
-    console.log(note)
     setTitle(note.title)
     setContent(note.content)
     setUserselected(note.author)
     //setDate(note.date)
+    setDate(new Date(note.date))
   }
 
   const updateUsers = async () => {
@@ -46,11 +46,11 @@ function CreateNote({ match }) {
 
     if (editing) {
       await api.editNote(match.params.id, newNote)
+      console.log(newNote)
     } else {
-      console.log(newNote, 'nsnsnsn')
       await api.createNote(newNote)
     }
-    window.location.href = '/';
+    //window.location.href = '/';
   }
 
 
@@ -110,6 +110,7 @@ function CreateNote({ match }) {
                 className="form-control"
                 selected={date}
                 onChange={date => setDate(date)}
+                dateFormat="MM/dd/yyyy"
               />
             </div>
           </div>
